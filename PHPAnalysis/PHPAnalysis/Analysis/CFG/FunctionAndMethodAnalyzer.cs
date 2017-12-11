@@ -253,7 +253,7 @@ namespace PHPAnalysis.Analysis.CFG
             if (customFunc != null )
             {
                 if(_funcHandler.ScannedFunctions.Contains(customFunc)){
-                    Console.WriteLine("> Ignore " + customFunc.Name + " scanned");
+                    Console.WriteLine("> " + customFunc.Name + " scanned, ignore it");
                 }else{
                     Console.WriteLine("> Scanning " + customFunc.Name );
                     _funcHandler.ScannedFunctions.Add(customFunc);
