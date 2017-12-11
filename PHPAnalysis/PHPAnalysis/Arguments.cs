@@ -21,6 +21,9 @@ namespace PHPAnalysis
             ", instead of defaulting to the one in the running folder. Use this if you encounter " +
             "problems with finding the Config.yml file. Usage: Full path and filename to Config.yml file";
 
+        private const string FileResulLoctHelpText = "If set, the FileWrite Plugin will write the result to " +
+            "the specific folder";
+
         [Option('t', "target", Required = true, HelpText = TargetHelpText)]
         public string Target { get; set; }
 
@@ -32,6 +35,9 @@ namespace PHPAnalysis
 
         [Option('c', "configlocation", HelpText = ConfigLocHelpText)]
         public string ConfigLocation { get; set; }
+
+        [Option('f', "fileResultLocation", HelpText = FileResulLoctHelpText)]
+        public string FileResultLocation { get; set; }
 
         [ParserState]
         public IParserState LastParserState { get; set; }

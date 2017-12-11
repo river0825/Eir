@@ -12,9 +12,24 @@ namespace FileWriter.Plugin
 {
     public class DbFileWriter
     {
-        private string vulnDBFile = "ScanResultForDB.txt";
+        private string vulnDBFile = "ScanResultForDB." + DateTimeOffset.Now.ToString("yyMMddHmmss") + ".txt";
         private readonly string _stackSeperator = Environment.NewLine + " → ";
         private FunctionsHandler _funcHandler;
+
+        private string _outputFolder;
+
+        public string outputFolder
+        {
+            get
+            {
+                return _outputFolder;
+            }
+            set
+            {
+                _outputFolder = value;
+                vulnDBFile = value + vulnDBFile;
+            }
+        }
 
         public void RegisterFunctionsHandler(FunctionsHandler functionsHandler)
         {
@@ -57,7 +72,7 @@ namespace FileWriter.Plugin
                     WriteInfo(vulnType + ";");
                     WriteInfo("Message: ");
                 }
-                
+
                 WriteInfoLine(pathInfo.Message);
                 WriteInfoLine(String.Join(_stackSeperator, pathInfo.IncludeStack));
                 WriteInfo("Callstack: " + String.Join(_stackSeperator, pathInfo.CallStack.Select(c => c.Name)));
@@ -93,7 +108,7 @@ namespace FileWriter.Plugin
                 return "";
             }
             throw new Exception("Unknown vulntype found. Something went wrong! Message was: " + message);
-            
+
         }
 
         public void WriteFilePath(IVulnerabilityInfo vulnInfo)
