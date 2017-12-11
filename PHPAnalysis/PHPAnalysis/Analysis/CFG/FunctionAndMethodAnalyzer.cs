@@ -251,6 +251,7 @@ namespace PHPAnalysis.Analysis.CFG
             }
             if (customFunc != null)
             {
+                Console.WriteLine("> Scanning " + customFunc.Name );
                 _funcHandler.ScannedFunctions.Add(customFunc);
                 tmp = this._customFunctionHandler.AnalyseCustomFunction(customFunc, this._varStorage, _vulnerabilityStorage, argInfos, this._incResolver, this._stacks);
             }

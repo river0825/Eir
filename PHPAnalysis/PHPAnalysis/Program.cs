@@ -133,7 +133,7 @@ namespace PHPAnalysis
             {
                 Preconditions.NotNull(varStorage, "varStorage");
                 Preconditions.NotNull(inclResolver, "inclResolver");
-                
+
                 var blockAnalyzer = new TaintBlockAnalyzer(vulnerabilityStorage, inclResolver, scope, fileTaintAnalyzer, stacks, subroutineAnalyzerFactory, _funcHandler);
                 blockAnalyzer.AnalysisExtensions.AddRange(_components.BlockAnalyzers);
                 var condAnalyser = new ConditionTaintAnalyser(scope, inclResolver, stacks.IncludeStack, _funcHandler);
@@ -189,7 +189,7 @@ namespace PHPAnalysis
             {
                 Console.WriteLine("Found multiple taint providers. Can't decide which one to use. Using builtin default taint.");
             }
-            
+
             return defaultTaint;
         }
 
@@ -199,6 +199,8 @@ namespace PHPAnalysis
 
             foreach (var file in filesCollection)
             {
+                Console.WriteLine("Scanning " + file.Name);
+
                 var analysisStacks = new AnalysisStacks(file);
                 var analyser = new FunctionAndMethodAnalyzer(defaultTaint,
                     new IncludeResolver(filesCollection), analysisStacks,
@@ -206,6 +208,7 @@ namespace PHPAnalysis
 
                 foreach (var function in file.Functions.SelectMany(f => f.Value).Except(_funcHandler.ScannedFunctions))
                 {
+                    Console.WriteLine("> Scanning method " + function.Name);
                     var functionCall = new FunctionCall(function.Name, function.AstNode, 0, 0);
                     analysisStacks.CallStack.Push(functionCall);
 
@@ -215,6 +218,7 @@ namespace PHPAnalysis
                 {
                     foreach (var method in @class.Methods.Except(_funcHandler.ScannedFunctions))
                     {
+                        Console.WriteLine("> Scanning method " + method.Name);
                         var methodCall = new MethodCall(method.Name, new [] { @class.Name }, method.AstNode, 0, 0);
                         analysisStacks.CallStack.Push(methodCall);
 
@@ -391,7 +395,7 @@ namespace PHPAnalysis
                 Console.WriteLine("Could not parse configuration file (config.yml). Please make sure the file is in correct Yaml format. ");
             }
             Environment.Exit(1);
-            return null; 
+            return null;
         }
 
         private static Arguments ParseArguments(string[] args)
