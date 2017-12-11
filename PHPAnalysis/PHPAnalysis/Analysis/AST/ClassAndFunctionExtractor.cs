@@ -280,7 +280,8 @@ namespace PHPAnalysis.Analysis.AST
             }
             else
             {
-                throw new InvalidOperationException("Leaving method outside interface and class declaration is not supported.");
+                // var f = currentFunctions.Pop();
+                // throw new InvalidOperationException("Leaving method outside interface and class declaration is not supported." + " file:" + f.File + "->" + f.StartLine );
             }
             functionClosureOrder.Pop();
         }
