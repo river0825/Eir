@@ -205,8 +205,10 @@ namespace PHPAnalysis.Analysis.AST
                     propertyModifiers = 0;
                     break;
                 case AstConstants.Nodes.Stmt_PropertyProperty:
-                    currentClass.Properties.Add(currentProperty);
-                    currentProperty = null;
+                    if(currentClass != null){
+                        currentClass.Properties.Add(currentProperty);
+                        currentProperty = null;
+                    }
                     break;
                 case AstConstants.Nodes.Stmt_Function:
                     _functions.Add(currentFunctions.Pop());
