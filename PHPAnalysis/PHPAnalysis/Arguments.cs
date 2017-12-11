@@ -47,7 +47,7 @@ namespace PHPAnalysis
         {
             var helpText = HelpText.AutoBuild(this, current => HelpText.DefaultParsingErrorsHandler(this, current));
             helpText.Heading = new HeadingInfo("Eir", "0.0.1");
-            helpText.Copyright = new CopyrightInfo(" ", 2015);
+            helpText.Copyright = new CopyrightInfo(" ", 2017);
             helpText.AdditionalNewLineAfterOption = true;
             helpText.AddPreOptionsLine("---------------------");
             helpText.AddPreOptionsLine("Usage: PhpAnalyzer -t [Directory/File] [Options]");
