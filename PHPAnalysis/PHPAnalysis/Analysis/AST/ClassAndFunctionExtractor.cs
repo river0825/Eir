@@ -205,7 +205,7 @@ namespace PHPAnalysis.Analysis.AST
                     propertyModifiers = 0;
                     break;
                 case AstConstants.Nodes.Stmt_PropertyProperty:
-                    if(currentClass != null){
+                    if(currentClass != null){ //it might be trait, ignore it first
                         currentClass.Properties.Add(currentProperty);
                         currentProperty = null;
                     }
