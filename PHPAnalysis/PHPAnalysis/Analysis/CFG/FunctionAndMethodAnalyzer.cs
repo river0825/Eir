@@ -249,12 +249,18 @@ namespace PHPAnalysis.Analysis.CFG
                     sqlSantizerFunc.DefaultStatus < sqlts.TaintTag ? new SQLITaintSet(sqlSantizerFunc.DefaultStatus) : sqlts.DeepClone(),
                     xssts) };
             }
-            if (customFunc != null)
+            
+            if (customFunc != null )
             {
-                Console.WriteLine("> Scanning " + customFunc.Name );
-                _funcHandler.ScannedFunctions.Add(customFunc);
-                tmp = this._customFunctionHandler.AnalyseCustomFunction(customFunc, this._varStorage, _vulnerabilityStorage, argInfos, this._incResolver, this._stacks);
+                if(_funcHandler.ScannedFunctions.Contains(customFunc)){
+                    Console.WriteLine("> Ignore " + customFunc.Name + " scanned");
+                }else{
+                    Console.WriteLine("> Scanning " + customFunc.Name );
+                    _funcHandler.ScannedFunctions.Add(customFunc);
+                    tmp = this._customFunctionHandler.AnalyseCustomFunction(customFunc, this._varStorage, _vulnerabilityStorage, argInfos, this._incResolver, this._stacks);
+                }
             }
+
             if (sourceFunc != null)
             {
                 tmp = new ExpressionInfo() { ExpressionTaint =  new TaintSets(sourceFunc.SqliTaint, sourceFunc.XssTaint) };
