@@ -86,7 +86,8 @@
 
 		{
 			"_comment": "the following is not real sources, but can introduce taint"
-		} {
+		},
+		{
 			"name": "rawurldecode",
 			"type": "function",
 			"_comment": "Tags are not required. The ALL tag is default if no tag is specified.",
