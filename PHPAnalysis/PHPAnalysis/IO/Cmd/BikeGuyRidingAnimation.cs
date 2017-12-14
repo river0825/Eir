@@ -45,7 +45,7 @@ namespace PHPAnalysis.IO.Cmd
                                   indentation + @"  --------  _ \<,_" + Environment.NewLine +
                                   indentation + @"-------    (*) \(*)",
                                 };
-            
+
             return UseThisStep;
         }
 
@@ -58,7 +58,8 @@ namespace PHPAnalysis.IO.Cmd
         {
             int windowWidth = System.Console.WindowWidth - 25;
             int i = (int)((Progrezz / (float)Max) * windowWidth);
-            return i;
+
+            return i < 0 ? 0 : i;
         }
     }
 }
